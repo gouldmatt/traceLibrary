@@ -1,12 +1,18 @@
 #include <iostream>
-#include <traceLibrary>
+#include "traceLibrary.hpp"
 
 using namespace std; 
 
-int main(){
+void traceLibrary::trace_start(char* filename){
 
-    return 0; 
+    cout << "hello world";
 }
 
 
+void traceLibrary::trace_end(){
 
+}
+
+int main(){
+    
+}
