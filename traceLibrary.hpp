@@ -5,7 +5,7 @@
 struct traceEvent{
     double startTime;
     double endTime;  
-    char nameBuffer[100];
+    char* namePtr;
 };
 
 class traceLibrary{
