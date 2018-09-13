@@ -1,6 +1,12 @@
 #include <iostream>
+#include <traceLibrary>
 
-int main () 
-{
+using namespace std; 
+
+int main(){
+
     return 0; 
 }
+
+
+
