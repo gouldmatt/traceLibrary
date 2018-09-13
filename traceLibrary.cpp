@@ -27,9 +27,9 @@ void traceLibrary::trace_event_end(){
     //auto end = chrono::steady_clock::now();
     eventsArr[currentEvent].endTime = 10; 
 
-    //flush to file, print for now 
+    //flush to file, print for now -- > need to add start/end for json 
     cout << "[ ";
-    cout << "\{​\"" << eventsArr[1].namePtr << "\"​:​\"Asub\"​,\"cat\"​:​\"PERF\"​,\"ph\"​:\"B\"​,​\"pid\"​:​22630​,\"tid\"​:​22630​,​\"ts\"​:​833​}";
+    cout << "\{​\"name\"​:\"" << eventsArr[1].namePtr << "\"​,\"cat\"​:​\"PERF\"​,\"ph\"​:\"B\"​,​\"pid\"​:​22630​,\"tid\"​:​22630​,​\"ts\"​:​833​}";
     cout << ",";
     cout << endl; 
     cout << "\{​\"name\"​:​\"Asub\"​,\"cat\"​:​\"PERF\"​,\"ph\"​:\"E\"​,​\"pid\"​:​22630​,\"tid\"​:​22630​,​\"ts\"​:​833​}";
