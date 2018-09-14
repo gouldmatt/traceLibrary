@@ -19,8 +19,11 @@ public:
     void trace_event_end();
 
 private: 
-    int currentEvent;
+    void flush_to_file(); 
+    
+    char* fileName;
     traceEvent eventsArr[10000]; 
+    int currentEvent;
 };
 
 #endif 
