@@ -14,21 +14,20 @@ void traceLibrary::trace_end(){
 }
 
 void traceLibrary::trace_event_start(char* name){
+     currentEvent++; 
 
     //start time measurement
     chrono::time_point<std::chrono::steady_clock> ts = std::chrono::steady_clock::now();
     eventsArr[currentEvent].startTime = chrono::duration_cast<std::chrono::nanoseconds>(ts.time_since_epoch()).count();
 
     eventsArr[currentEvent].namePtr = name; 
-
-    currentEvent++;
 }
 
 void traceLibrary::trace_event_end(){
 
     //end time measurement
     chrono::time_point<std::chrono::steady_clock> ts = std::chrono::steady_clock::now();
-    eventsArr[0].endTime = chrono::duration_cast<std::chrono::nanoseconds>(ts.time_since_epoch()).count(); 
+    eventsArr[currentEvent].endTime = chrono::duration_cast<std::chrono::nanoseconds>(ts.time_since_epoch()).count(); 
 }
 
 void traceLibrary::flush_to_file(){
@@ -36,15 +35,11 @@ void traceLibrary::flush_to_file(){
     //flush to file, print for now -- > need to add start/end for json 
     cout << "[" << endl;
 
-    //for(int i =0; i<=currentEvent; i++){
-
-
-    //}
-    
-    cout << "{\"name\": \"" << eventsArr[0].namePtr << "\", \"cat\": \"PERF\", \"ph\": \"B\", \"pid\": 1, \"ts\": \"" << eventsArr[0].startTime << "\"}";
-    cout << "," << endl;
-    cout << "{\"name\": \"" << eventsArr[0].namePtr << "\", \"cat\": \"PERF\", \"ph\": \"E\", \"pid\": 1, \"ts\": \"" << eventsArr[0].endTime << "\"}";
-
+    for(int i =1; i<=currentEvent; i++){
+        cout << "{\"name\": \"" << eventsArr[i].namePtr << "\", \"cat\": \"PERF\", \"ph\": \"B\", \"pid\": 1, \"ts\": \"" << eventsArr[i].startTime << "\"}";
+        cout << "," << endl;
+        cout << "{\"name\": \"" << eventsArr[i].namePtr << "\", \"cat\": \"PERF\", \"ph\": \"E\", \"pid\": 1, \"ts\": \"" << eventsArr[i].endTime << "\"}";
+    }
 
     cout << endl << "]";
     cout << endl; 
