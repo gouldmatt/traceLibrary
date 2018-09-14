@@ -39,9 +39,13 @@ void traceLibrary::flush_to_file(){
         cout << "{\"name\": \"" << eventsArr[i].namePtr << "\", \"cat\": \"PERF\", \"ph\": \"B\", \"pid\": 1, \"ts\": \"" << eventsArr[i].startTime << "\"}";
         cout << "," << endl;
         cout << "{\"name\": \"" << eventsArr[i].namePtr << "\", \"cat\": \"PERF\", \"ph\": \"E\", \"pid\": 1, \"ts\": \"" << eventsArr[i].endTime << "\"}";
+
+        if(i != currentEvent) {cout << ",";}
+
+        cout << endl;
     }
 
-    cout << endl << "]";
+    cout << "]";
     cout << endl; 
 }
 
@@ -49,6 +53,8 @@ int main(){
     traceLibrary trace1;
 
     char name[] = "start";
+    char name2[] = "second"; 
+    char name3[] = "third"; 
 
     //program not being traced
 
@@ -57,6 +63,18 @@ int main(){
     trace1.trace_event_start(name);
 
     trace1.trace_event_end();
+
+    trace1.trace_event_start(name2);
+
+    int yeah = (100000 *80) + 90000;
+
+    trace1.trace_event_end();
+
+
+    trace1.trace_event_start(name3);
+
+    trace1.trace_event_end();
+
 
     trace1.trace_end(); 
 
