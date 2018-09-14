@@ -3,8 +3,8 @@
 #define TRACELIBRARY_HPP
 
 struct traceEvent{
-    double startTime;
-    double endTime;  
+    int startTime;
+    int endTime;  
     char* namePtr;
 };
 
@@ -20,7 +20,7 @@ public:
 
 private: 
     void flush_to_file(); 
-    
+
     char* fileName;
     traceEvent eventsArr[10000]; 
     int currentEvent;

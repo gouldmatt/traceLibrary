@@ -16,8 +16,8 @@ void traceLibrary::trace_end(){
 void traceLibrary::trace_event_start(char* name){
 
     //start time measurement
-    //eventsArr[currentEvent].startTime = chrono::system_clock::now();
-    eventsArr[currentEvent].startTime = 1; 
+    chrono::time_point<std::chrono::steady_clock> ts = std::chrono::steady_clock::now();
+    eventsArr[currentEvent].startTime = chrono::duration_cast<std::chrono::nanoseconds>(ts.time_since_epoch()).count();
 
     eventsArr[currentEvent].namePtr = name; 
 
@@ -25,9 +25,10 @@ void traceLibrary::trace_event_start(char* name){
 }
 
 void traceLibrary::trace_event_end(){
+
     //end time measurement
-    //auto end = chrono::steady_clock::now();
-    eventsArr[currentEvent].endTime = 10; 
+    chrono::time_point<std::chrono::steady_clock> ts = std::chrono::steady_clock::now();
+    eventsArr[0].endTime = chrono::duration_cast<std::chrono::nanoseconds>(ts.time_since_epoch()).count(); 
 }
 
 void traceLibrary::flush_to_file(){
@@ -40,9 +41,9 @@ void traceLibrary::flush_to_file(){
 
     //}
     
-    cout << "{\"name\": \"" << eventsArr[0].namePtr << "\", \"cat\": \"PERF\", \"ph\": \"B\", \"pid\": 1, \"ts\": 1}";
+    cout << "{\"name\": \"" << eventsArr[0].namePtr << "\", \"cat\": \"PERF\", \"ph\": \"B\", \"pid\": 1, \"ts\": \"" << eventsArr[0].startTime << "\"}";
     cout << "," << endl;
-    cout << "{\"name\": \"" << eventsArr[0].namePtr << "\", \"cat\": \"PERF\", \"ph\": \"E\", \"pid\": 1, \"ts\": 20}";
+    cout << "{\"name\": \"" << eventsArr[0].namePtr << "\", \"cat\": \"PERF\", \"ph\": \"E\", \"pid\": 1, \"ts\": \"" << eventsArr[0].endTime << "\"}";
 
 
     cout << endl << "]";
