@@ -31,11 +31,13 @@ void traceLibrary::trace_event_end(){
     //end time measurement
     clock_t t;
     t = clock();
-    eventsArr[currentEvent].endTime = t; 
+    //doesn't always end in the same order as it started... use stack??
+    eventsArr[currentEvent].endTime = t;
+    cout << t << endl;
 }
 
 void traceLibrary::flush_to_file(){
- 
+    //might need to write to a buffer as the event occure to properly nest
     ofstream f;
     f.open(fileName);
     

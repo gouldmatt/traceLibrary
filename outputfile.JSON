@@ -1,8 +1,8 @@
 [
-{"name": "start", "cat": "PERF", "ph": "B", "pid": 1, "ts": "1992"},
-{"name": "start", "cat":  "PERF", "ph": "E", "pid": 1, "ts": "1995"},
-{"name": "second", "cat": "PERF", "ph": "B", "pid": 1, "ts": "1995"},
-{"name": "second", "cat":  "PERF", "ph": "E", "pid": 1, "ts": "1997"},
-{"name": "third", "cat": "PERF", "ph": "B", "pid": 1, "ts": "1997"},
-{"name": "third", "cat":  "PERF", "ph": "E", "pid": 1, "ts": "1997"}
+{"name": "main", "cat": "PERF", "ph": "B", "pid": 1, "ts": "2000"},
+{"name": "main", "cat":  "PERF", "ph": "E", "pid": 1, "ts": "0"},
+{"name": "addLoop", "cat": "PERF", "ph": "B", "pid": 1, "ts": "2002"},
+{"name": "addLoop", "cat":  "PERF", "ph": "E", "pid": 1, "ts": "2004"},
+{"name": "otherLoop", "cat": "PERF", "ph": "B", "pid": 1, "ts": "2040"},
+{"name": "otherLoop", "cat":  "PERF", "ph": "E", "pid": 1, "ts": "2089"}
 ]
