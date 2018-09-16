@@ -25,7 +25,8 @@ private:
 
     char* fileName;
     traceEvent eventsArr[10000]; 
-    int currentEvent;
+    int uncompleteIndex;
+    int completeIndex; 
 };
 
 #endif 

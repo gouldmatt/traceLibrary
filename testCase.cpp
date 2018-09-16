@@ -1,5 +1,5 @@
 #include <iostream>
-#include "traceLibrary.cpp"
+#include "traceLibrary.hpp"
 
 using namespace std;
 void addLoop(){

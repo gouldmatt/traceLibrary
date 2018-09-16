@@ -6,7 +6,8 @@
 using namespace std; 
 
 void traceLibrary::trace_start(char* file){ 
-    currentEvent = 0; 
+    uncompleteIndex = 0; 
+    completeIndex = 0; 
     fileName = file; 
 }
 
@@ -15,24 +16,28 @@ void traceLibrary::trace_end(){
 }
 
 void traceLibrary::trace_event_start(char* name, char* cat){
-     currentEvent++; 
+
+    eventsArr[uncompleteIndex].namePtr = name;
+    eventsArr[uncompleteIndex].category = cat; 
 
     //start time measurement
     clock_t t;
-    t = clock();
+    t = clock()/CLOCKS_PER_SEC;
     
-    eventsArr[currentEvent].startTime = t;
-    eventsArr[currentEvent].namePtr = name;
-    eventsArr[currentEvent].category = cat; 
+    eventsArr[uncompleteIndex].startTime = t;
+    uncompleteIndex++;
 }
 
 void traceLibrary::trace_event_end(){
 
     //end time measurement
     clock_t t;
-    t = clock();
+    t = clock()/CLOCKS_PER_SEC;
     //doesn't always end in the same order as it started... use stack??
-    eventsArr[currentEvent].endTime = t;
+    eventsArr[completeIndex].endTime = t;
+    
+    completeIndex++; 
+
     cout << t << endl;
 }
 
@@ -43,12 +48,12 @@ void traceLibrary::flush_to_file(){
     
     f << "[" << endl;
     //JSON format (could use json handler here instead)
-    for(int i=1; i<=currentEvent; i++){
+    for(int i=0; i<completeIndex; i++){
         f << "{\"name\": \"" << eventsArr[i].namePtr << "\", \"cat\": \"" << eventsArr[i].category << "\", \"ph\": \"B\", \"pid\": 1, \"ts\": \"" << eventsArr[i].startTime << "\"}";
         f << "," << endl;
         f << "{\"name\": \"" << eventsArr[i].namePtr << "\", \"cat\":  \"" << eventsArr[i].category << "\", \"ph\": \"E\", \"pid\": 1, \"ts\": \"" << eventsArr[i].endTime << "\"}";
 
-        if(i != currentEvent) {f << ",";}
+        if(i != completeIndex-1) {f << ",";}
         f << endl;
     }
 
