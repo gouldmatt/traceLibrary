@@ -4,17 +4,19 @@
 
 struct traceEvent{
     int startTime;
-    int endTime;  
+    int endTime;
+    char* arguments;
+    char* category; 
     char* namePtr;
 };
 
 class traceLibrary{
 public: 
-    void trace_start(char* filename);
+    void trace_start(char* file);
 
     void trace_end(); 
 
-    void trace_event_start(char* name);
+    void trace_event_start(char* name, char* cat);
 
     void trace_event_end();
 

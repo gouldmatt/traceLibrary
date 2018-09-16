@@ -1,0 +1,8 @@
+[
+{"name": "start", "cat": "PERF", "ph": "B", "pid": 1, "ts": "1243377175"},
+{"name": "start", "cat": "PERF", "ph": "E", "pid": 1, "ts": "1243377603"},
+{"name": "second", "cat": "PERF", "ph": "B", "pid": 1, "ts": "1243377817"},
+{"name": "second", "cat": "PERF", "ph": "E", "pid": 1, "ts": "1243377977"},
+{"name": "third", "cat": "PERF", "ph": "B", "pid": 1, "ts": "1268054670"},
+{"name": "third", "cat": "PERF", "ph": "E", "pid": 1, "ts": "1268054763"}
+]
