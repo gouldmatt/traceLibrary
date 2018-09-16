@@ -24,9 +24,10 @@ private:
     void flush_to_file(); 
 
     char* fileName;
+    unsigned char stack[10000];
     traceEvent eventsArr[10000]; 
-    int uncompleteIndex;
-    int completeIndex; 
+    int eventIndex; 
+    int stackCounter;
 };
 
 #endif 

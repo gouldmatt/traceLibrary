@@ -1,8 +1,8 @@
 [
-{"name": "main", "cat": "PERF", "ph": "B", "pid": 1, "ts": "1278"},
-{"name": "main", "cat":  "PERF", "ph": "E", "pid": 1, "ts": "1283"},
-{"name": "addLoop", "cat": "PERF", "ph": "B", "pid": 1, "ts": "1279"},
-{"name": "addLoop", "cat":  "PERF", "ph": "E", "pid": 1, "ts": "1339"},
-{"name": "otherLoop", "cat": "PERF", "ph": "B", "pid": 1, "ts": "1306"},
-{"name": "otherLoop", "cat":  "PERF", "ph": "E", "pid": 1, "ts": "1343"}
+{"name": "main", "cat": "PERF", "ph": "B", "pid": 1, "ts": "0"},
+{"name": "main", "cat":  "PERF", "ph": "E", "pid": 1, "ts": "1"},
+{"name": "addLoop", "cat": "PERF", "ph": "B", "pid": 1, "ts": "0"},
+{"name": "addLoop", "cat":  "PERF", "ph": "E", "pid": 1, "ts": "0"},
+{"name": "otherLoop", "cat": "PERF", "ph": "B", "pid": 1, "ts": "0"},
+{"name": "otherLoop", "cat":  "PERF", "ph": "E", "pid": 1, "ts": "1"}
 ]

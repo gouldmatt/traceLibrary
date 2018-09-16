@@ -6,8 +6,8 @@
 using namespace std; 
 
 void traceLibrary::trace_start(char* file){ 
-    uncompleteIndex = 0; 
-    completeIndex = 0; 
+    eventIndex = 0; 
+    stackCounter = 0; 
     fileName = file; 
 }
 
@@ -17,43 +17,47 @@ void traceLibrary::trace_end(){
 
 void traceLibrary::trace_event_start(char* name, char* cat){
 
-    eventsArr[uncompleteIndex].namePtr = name;
-    eventsArr[uncompleteIndex].category = cat; 
+    eventsArr[eventIndex].namePtr = name;
+    eventsArr[eventIndex].category = cat; 
+
+    //push index to stack 
+    stack[stackCounter] = eventIndex;
+    stackCounter++; 
 
     //start time measurement
     clock_t t;
-    t = clock()/CLOCKS_PER_SEC;
+    t = (clock()/CLOCKS_PER_SEC);
     
-    eventsArr[uncompleteIndex].startTime = t;
-    uncompleteIndex++;
+    eventsArr[eventIndex].startTime = t;
+    eventIndex++;
 }
 
 void traceLibrary::trace_event_end(){
 
     //end time measurement
     clock_t t;
-    t = clock()/CLOCKS_PER_SEC;
-    //doesn't always end in the same order as it started... use stack??
-    eventsArr[completeIndex].endTime = t;
-    
-    completeIndex++; 
+    t = (clock()/CLOCKS_PER_SEC);
 
-    cout << t << endl;
+    //pop stack to find index of event to end
+    eventsArr[stack[stackCounter-1]].endTime = t;
+
+    stack[stackCounter] = 0;
+    stackCounter--; 
 }
 
 void traceLibrary::flush_to_file(){
     //might need to write to a buffer as the event occure to properly nest
     ofstream f;
     f.open(fileName);
-    
+
     f << "[" << endl;
     //JSON format (could use json handler here instead)
-    for(int i=0; i<completeIndex; i++){
+    for(int i=0; i<eventIndex; i++){
         f << "{\"name\": \"" << eventsArr[i].namePtr << "\", \"cat\": \"" << eventsArr[i].category << "\", \"ph\": \"B\", \"pid\": 1, \"ts\": \"" << eventsArr[i].startTime << "\"}";
         f << "," << endl;
         f << "{\"name\": \"" << eventsArr[i].namePtr << "\", \"cat\":  \"" << eventsArr[i].category << "\", \"ph\": \"E\", \"pid\": 1, \"ts\": \"" << eventsArr[i].endTime << "\"}";
 
-        if(i != completeIndex-1) {f << ",";}
+        if(i != eventIndex-1) {f << ",";}
         f << endl;
     }
 
