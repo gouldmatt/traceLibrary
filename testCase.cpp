@@ -12,7 +12,7 @@ void addLoop(){
 void otherLoop(){
     //stall in program to test
     int count = 0;
-    for(int i=0; i<999999999; i++){
+    for(int i=0; i<9999; i++){
         count++;
     } 
 }

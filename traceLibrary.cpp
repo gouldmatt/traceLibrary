@@ -26,7 +26,7 @@ void traceLibrary::trace_event_start(char* name, char* cat){
 
     //start time measurement
     clock_t t;
-    t = (clock()/CLOCKS_PER_SEC);
+    t = clock();
     
     eventsArr[eventIndex].startTime = t;
     eventIndex++;
@@ -36,7 +36,7 @@ void traceLibrary::trace_event_end(){
 
     //end time measurement
     clock_t t;
-    t = (clock()/CLOCKS_PER_SEC);
+    t = clock();
 
     //pop stack to find index of event to end
     eventsArr[stack[stackCounter-1]].endTime = t;
