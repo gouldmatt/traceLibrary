@@ -23,7 +23,7 @@ int main(){
 
     //stall in program to test with time
     int count = 0;
-    for(int i=0; i<10000000; i++){
+    for(int i=0; i<10000; i++){
         count++;
     }
     /////////////////////////////////////

@@ -18,11 +18,10 @@ void traceLibrary::trace_event_start(char* name, char* cat){
      currentEvent++; 
 
     //start time measurement
-    //clock_t t;
-    //t = clock();
-    chrono::time_point<std::chrono::steady_clock> ts = std::chrono::steady_clock::now();
-    eventsArr[currentEvent].startTime = chrono::duration_cast<std::chrono::nanoseconds>(ts.time_since_epoch()).count();
-
+    clock_t t;
+    t = clock();
+    
+    eventsArr[currentEvent].startTime = t;
     eventsArr[currentEvent].namePtr = name;
     eventsArr[currentEvent].category = cat; 
 }
@@ -30,10 +29,9 @@ void traceLibrary::trace_event_start(char* name, char* cat){
 void traceLibrary::trace_event_end(){
 
     //end time measurement
-    //clock_t t;
-    //t = clock();
-    chrono::time_point<std::chrono::steady_clock> ts = std::chrono::steady_clock::now();
-    eventsArr[currentEvent].endTime = chrono::duration_cast<std::chrono::nanoseconds>(ts.time_since_epoch()).count(); 
+    clock_t t;
+    t = clock();
+    eventsArr[currentEvent].endTime = t; 
 }
 
 void traceLibrary::flush_to_file(){
