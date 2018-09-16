@@ -24,7 +24,7 @@ private:
     void flush_to_file(); 
 
     char* fileName;
-    unsigned char stack[10000]; // data type unsigned char to reduce overhead (only need num < 255)
+    unsigned short int stack[10000]; 
     traceEvent eventsArr[10000]; 
     int eventIndex; 
     int stackCounter;
