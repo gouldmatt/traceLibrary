@@ -6,14 +6,13 @@ using namespace std;
 int main(){
     
     traceLibrary trace1;
-
+    char file[] = "outputfile.JSON";
     char name[] = "start";
     char name2[] = "second"; 
     char name3[] = "third"; 
     char cat[] = "PERF";
 
-
-    trace1.trace_start(name);
+    trace1.trace_start(file);
 
     trace1.trace_event_start(name, cat);
     trace1.trace_event_end();
@@ -22,10 +21,10 @@ int main(){
     trace1.trace_event_end();
 
     //stall in program to test with time
-    int count = 0;
-    for(int i=0; i<10000; i++){
-        count++;
-    }
+    //int count = 0;
+    //for(int i=0; i<10000; i++){
+        //count++;
+    //}
     /////////////////////////////////////
 
     trace1.trace_event_start(name3, cat);

@@ -1,5 +1,5 @@
 #include <iostream>
-#include <chrono> 
+#include <fstream> 
 #include <time.h>
 #include "traceLibrary.hpp"
 
@@ -35,19 +35,22 @@ void traceLibrary::trace_event_end(){
 }
 
 void traceLibrary::flush_to_file(){
-
-    //flush to file, print for now -- > need to add start/end for json 
-    cout << "[" << endl;
-
+ 
+    ofstream f;
+    f.open(fileName);
+    
+    f << "[" << endl;
+    //JSON format (could use json handler here instead)
     for(int i=1; i<=currentEvent; i++){
-        cout << "{\"name\": \"" << eventsArr[i].namePtr << "\", \"cat\": \"" << eventsArr[i].category << "\", \"ph\": \"B\", \"pid\": 1, \"ts\": \"" << eventsArr[i].startTime << "\"}";
-        cout << "," << endl;
-        cout << "{\"name\": \"" << eventsArr[i].namePtr << "\", \"cat\":  \"" << eventsArr[i].category << "\", \"ph\": \"E\", \"pid\": 1, \"ts\": \"" << eventsArr[i].endTime << "\"}";
+        f << "{\"name\": \"" << eventsArr[i].namePtr << "\", \"cat\": \"" << eventsArr[i].category << "\", \"ph\": \"B\", \"pid\": 1, \"ts\": \"" << eventsArr[i].startTime << "\"}";
+        f << "," << endl;
+        f << "{\"name\": \"" << eventsArr[i].namePtr << "\", \"cat\":  \"" << eventsArr[i].category << "\", \"ph\": \"E\", \"pid\": 1, \"ts\": \"" << eventsArr[i].endTime << "\"}";
 
-        if(i != currentEvent) {cout << ",";}
-        cout << endl;
+        if(i != currentEvent) {f << ",";}
+        f << endl;
     }
 
-    cout << "]";
-    cout << endl; 
+    f << "]";
+    f << endl;
+    f.close();
 }
