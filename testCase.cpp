@@ -8,6 +8,8 @@
  char cat[] = "PERF";
 
 using namespace std;
+using namespace TRACELIBRARY;
+
 void addLoop(){
     //stall in program to test
     int count = 0;
