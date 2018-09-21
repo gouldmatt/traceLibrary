@@ -17,7 +17,7 @@ void otherLoop();
 
 int main(){
 
-    int count = 9; 
+    int count = 90; 
 
     trace_start(file);
     trace_event_start(name, cat, none); //for main 'B'
@@ -37,13 +37,15 @@ int main(){
 }
 
 void addLoop(int count){
-    //test recursive call  
+    //test recursive call
+    trace_event_start(name2, cat, none); //for addLoop 'B'  
     if(count != 0){
         count--; 
         otherLoop(); 
         addLoop(count); 
 
     }  
+    trace_event_end(none); //for addLoop 'E'
     return; 
 }
 void otherLoop(){
