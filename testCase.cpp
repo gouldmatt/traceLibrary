@@ -8,7 +8,7 @@
  char cat[] = "PERF";
 
 using namespace std;
-using namespace TRACELIBRARY;
+
 
 void addLoop(){
     //stall in program to test
@@ -26,19 +26,19 @@ void otherLoop(){
 }
 int main(){
 
-    trace_start(file);
-    trace_event_start(name, cat); //for main 'B'
+    TRACELIBRARY::trace_start(file);
+    TRACELIBRARY::trace_event_start(name, cat); //for main 'B'
 
-    trace_event_start(name2, cat); //for addLoop 'B'
+    TRACELIBRARY::trace_event_start(name2, cat); //for addLoop 'B'
     addLoop();
-    trace_event_end(); //for addLoop 'E'
+    TRACELIBRARY::trace_event_end(); //for addLoop 'E'
 
-    trace_event_start(name3, cat); //for otherLoop 'B'
+    TRACELIBRARY::trace_event_start(name3, cat); //for otherLoop 'B'
     otherLoop();
-    trace_event_end(); //for otherLoop 'E'
+    TRACELIBRARY::trace_event_end(); //for otherLoop 'E'
 
-    trace_event_end(); //for main 'E'
-    trace_end(); 
+    TRACELIBRARY::trace_event_end(); //for main 'E'
+    TRACELIBRARY::trace_end(); 
 
     return 0;
 }
