@@ -24,10 +24,10 @@ void TRACELIBRARY::trace_start(char* file){
 }
 
 void TRACELIBRARY::trace_end(){
-    TRACELIBRARY::flush_to_file(); 
+    TRACELIBRARY::trace_flush(); 
 }
 
-void TRACELIBRARY::trace_event_start(char* name, char* cat){
+void TRACELIBRARY::trace_event_start(char* name, char* cat, char* arg){
 
     eventsArr[eventIndex].namePtr = name;
     eventsArr[eventIndex].category = cat; 
@@ -44,7 +44,7 @@ void TRACELIBRARY::trace_event_start(char* name, char* cat){
     eventIndex++;
 }
 
-void TRACELIBRARY::trace_event_end(){
+void TRACELIBRARY::trace_event_end(char* arg){
 
     //end time measurement
     clock_t t;
@@ -57,7 +57,7 @@ void TRACELIBRARY::trace_event_end(){
     stackCounter--; 
 }
 
-void TRACELIBRARY::flush_to_file(){
+void TRACELIBRARY::trace_flush(){
     //might need to write to a buffer as the event occure to properly nest
     std::ofstream f;
     f.open(fileName);
@@ -76,4 +76,20 @@ void TRACELIBRARY::flush_to_file(){
     f << "]";
     f << std::endl;
     f.close();
+}
+
+void TRACELIBRARY::trace_instant_global(char* name){
+
+}
+
+void TRACELIBRARY::trace_object_new(char* name, void* obj_pointer){
+
+}
+
+void TRACELIBRARY::trace_object_gone(char* name, void* obj_pointer){
+
+}
+
+void TRACELIBRARY::trace_counter(char* name, char* key, char* value){
+
 }

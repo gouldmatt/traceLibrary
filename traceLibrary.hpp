@@ -8,10 +8,18 @@ namespace TRACELIBRARY{
 
     void trace_end(); 
 
-    void trace_event_start(char* name, char* cat);
+    void trace_event_start(char* name, char* cat, char* arg);
 
-    void trace_event_end();
+    void trace_event_end(char* arg);
     
-    void flush_to_file(); 
+    void trace_flush(); 
+
+    void trace_instant_global(char* name);
+
+    void trace_object_new(char* name, void* obj_pointer);
+
+    void trace_object_gone(char* name, void* obj_pointer);
+
+    void trace_counter(char* name, char* key, char* value);
 }
 #endif 
