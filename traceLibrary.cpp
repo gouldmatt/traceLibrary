@@ -3,19 +3,31 @@
 #include <time.h>
 #include "traceLibrary.hpp"
 
-using namespace std; 
+struct traceEvent{
+    int startTime;
+    int endTime;
+    char *arguments;
+    char *category;
+    char *namePtr;
+};
 
-void traceLibrary::trace_start(char* file){ 
+char *fileName;
+unsigned short int stack[10000];
+traceEvent eventsArr[10000];
+int eventIndex;
+int stackCounter;
+
+void TRACELIBRARY::trace_start(char* file){ 
     eventIndex = 0; 
     stackCounter = 0; 
     fileName = file; 
 }
 
-void traceLibrary::trace_end(){
-    flush_to_file(); 
+void TRACELIBRARY::trace_end(){
+    TRACELIBRARY::flush_to_file(); 
 }
 
-void traceLibrary::trace_event_start(char* name, char* cat){
+void TRACELIBRARY::trace_event_start(char* name, char* cat){
 
     eventsArr[eventIndex].namePtr = name;
     eventsArr[eventIndex].category = cat; 
@@ -32,7 +44,7 @@ void traceLibrary::trace_event_start(char* name, char* cat){
     eventIndex++;
 }
 
-void traceLibrary::trace_event_end(){
+void TRACELIBRARY::trace_event_end(){
 
     //end time measurement
     clock_t t;
@@ -45,23 +57,23 @@ void traceLibrary::trace_event_end(){
     stackCounter--; 
 }
 
-void traceLibrary::flush_to_file(){
+void TRACELIBRARY::flush_to_file(){
     //might need to write to a buffer as the event occure to properly nest
-    ofstream f;
+    std::ofstream f;
     f.open(fileName);
 
-    f << "[" << endl;
+    f << "[" << std::endl;
     //JSON format (could use json handler here instead)
     for(int i=0; i<eventIndex; i++){
         f << "{\"name\": \"" << eventsArr[i].namePtr << "\", \"cat\": \"" << eventsArr[i].category << "\", \"ph\": \"B\", \"pid\": 1, \"ts\": \"" << eventsArr[i].startTime << "\"}";
-        f << "," << endl;
+        f << "," << std::endl;
         f << "{\"name\": \"" << eventsArr[i].namePtr << "\", \"cat\":  \"" << eventsArr[i].category << "\", \"ph\": \"E\", \"pid\": 1, \"ts\": \"" << eventsArr[i].endTime << "\"}";
 
         if(i != eventIndex-1) {f << ",";}
-        f << endl;
+        f << std::endl;
     }
 
     f << "]";
-    f << endl;
+    f << std::endl;
     f.close();
 }
