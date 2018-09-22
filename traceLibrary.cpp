@@ -1,10 +1,11 @@
 // header file  for trace library 
-#ifndef TRACELIBRARY_HPP
-#define TRACELIBRARY_HPP
+//#ifndef TRACELIBRARY_HPP
+//#define TRACELIBRARY_HPP
 
 #include <iostream>
 #include <fstream> 
 #include <time.h>
+#include <csignal>
 
 namespace TRACELIBRARY
 {
@@ -29,8 +30,9 @@ namespace TRACELIBRARY
     void trace_event_start(char* name, char* cat);
 
     void trace_event_end();
+  
+    void signal_handler(int signal_num); 
 
-    
     void flush_to_file(); 
 
     void trace_start(char* file){ 
@@ -73,6 +75,13 @@ namespace TRACELIBRARY
         stackCounter--; 
     }
 
+    void signal_handler(int signal_num){ 
+        std::cout << "The interrupt signal is (" << signal_num << "). \n"; 
+     
+        trace_end();
+        // terminate program   
+        exit(signal_num);   
+    } 
     void flush_to_file(){
         //might need to write to a buffer as the event occure to properly nest
         std::ofstream f;
@@ -95,4 +104,4 @@ namespace TRACELIBRARY
     }
 }
 
-#endif 
+//#endif 
