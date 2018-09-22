@@ -1,6 +1,6 @@
 #include <iostream>
 #include <csignal>
-#include "traceLibrary.cpp"
+#include "traceLibrary.hpp"
 
  char file[] = "outputfile.JSON";
  char name[] = "main";
@@ -28,24 +28,14 @@ void otherLoop(){
 int main(){
     signal(SIGSEGV, signal_handler);   
     // register signal SIGSEGV and signal handler 
-    int i = 1;
 
     trace_start(file);
     trace_event_start(name, cat); //for main 'B'
 
-    
-
     trace_event_start(name2, cat); //for addLoop 'B'
     addLoop();
     trace_event_end(); //for addLoop 'E'
-    while(i++){
-        cout << "Going to sleep...." << endl;
-        if(i == 3) {
-            raise(SIGSEGV); // segmentation fault 11 (invalid access to storage)
-            //int *a; //another way to cause a seg 11
-            //*a = 0;
-        }
-    }
+
     trace_event_start(name3, cat); //for otherLoop 'B'
     otherLoop();
     trace_event_end(); //for otherLoop 'E'
