@@ -5,6 +5,7 @@
  char name[] = "main";
  char name2[] = "addLoop"; 
  char name3[] = "otherLoop"; 
+ char name4[] = "counter"; 
  char cat[] = "PERF";
  char none[] = "none"; 
 
@@ -17,7 +18,7 @@ void otherLoop();
 
 int main(){
 
-    int count = 90; 
+    int count = 9; 
 
     trace_start(file);
     trace_event_start(name, cat, none); //for main 'B'
@@ -25,6 +26,16 @@ int main(){
     trace_event_start(name2, cat, none); //for addLoop 'B'
     addLoop(count);
     trace_event_end(none); //for addLoop 'E'
+
+    trace_counter(name4,"ctr","10");
+    otherLoop();
+    trace_counter(name4,"ctr","20");
+    otherLoop();
+    trace_counter(name4,"ctr","5");
+    otherLoop();
+    trace_counter(name4,"ctr","90");
+    otherLoop();
+    trace_counter(name4,"ctr","0");
 
     trace_event_start(name3, cat, none); //for otherLoop 'B'
     otherLoop();
@@ -38,8 +49,9 @@ int main(){
 
 void addLoop(int count){
     //test recursive call
-    trace_event_start(name2, cat, none); //for addLoop 'B'  
+    
     if(count != 0){
+        trace_event_start(name2, cat, none); //for addLoop 'B'  
         count--; 
         otherLoop(); 
         addLoop(count); 
