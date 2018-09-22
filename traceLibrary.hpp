@@ -4,22 +4,22 @@
 
 namespace TRACELIBRARY{
 
-    void trace_start(char* file);
+    void trace_start(const char* file);
 
     void trace_end(); 
 
-    void trace_event_start(char* name, char* cat, char* arg);
+    void trace_event_start(const char* name, const char* cat, const char* arg);
 
-    void trace_event_end(char* arg);
+    void trace_event_end(const char* arg);
     
     void trace_flush(); 
 
-    void trace_instant_global(char* name);
+    void trace_instant_global(const char* name);
 
-    void trace_object_new(char* name, void* obj_pointer);
+    void trace_object_new(const char* name, void* obj_pointer);
 
-    void trace_object_gone(char* name, void* obj_pointer);
+    void trace_object_gone(const char* name, void* obj_pointer);
 
-    void trace_counter(char* name, char* key, char* value);
+    void trace_counter(const char* name, const char* key, const char* value);
 }
 #endif 

@@ -1,14 +1,6 @@
 #include <iostream>
 #include "traceLibrary.hpp"
 
- char file[] = "outputfile.JSON";
- char name[] = "main";
- char name2[] = "addLoop"; 
- char name3[] = "otherLoop"; 
- char name4[] = "counter"; 
- char cat[] = "PERF";
- char none[] = "none"; 
-
 using namespace std;
 using namespace TRACELIBRARY;
 
@@ -20,28 +12,28 @@ int main(){
 
     int count = 9; 
 
-    trace_start(file);
-    trace_event_start(name, cat, none); //for main 'B'
+    trace_start("outputfile.JSON");
+    trace_event_start("main", "PERF", "none"); //for main 'B'
 
-    trace_event_start(name2, cat, none); //for addLoop 'B'
+    trace_event_start("addLoop", "PERF", "none"); //for addLoop 'B'
     addLoop(count);
-    trace_event_end(none); //for addLoop 'E'
+    trace_event_end("none"); //for addLoop 'E'
 
-    trace_counter(name4,"ctr","10");
+    trace_counter("counter","ctr","10");
     otherLoop();
-    trace_counter(name4,"ctr","20");
+    trace_counter("counter","ctr","20");
     otherLoop();
-    trace_counter(name4,"ctr","5");
+    trace_counter("counter","ctr","60");
     otherLoop();
-    trace_counter(name4,"ctr","90");
+    trace_counter("counter","ctr","90");
     otherLoop();
-    trace_counter(name4,"ctr","0");
+    trace_counter("counter","ctr","30");
 
-    trace_event_start(name3, cat, none); //for otherLoop 'B'
+    trace_event_start("otherLoop", "PERF", "none"); //for otherLoop 'B'
     otherLoop();
-    trace_event_end(none); //for otherLoop 'E'
+    trace_event_end("none"); //for otherLoop 'E'
 
-    trace_event_end(none); //for main 'E'
+    trace_event_end("none"); //for main 'E'
     trace_end(); 
 
     return 0;
@@ -51,13 +43,13 @@ void addLoop(int count){
     //test recursive call
     
     if(count != 0){
-        trace_event_start(name2, cat, none); //for addLoop 'B'  
+        trace_event_start("addLoop", "PERF", "none"); //for addLoop 'B'  
         count--; 
         otherLoop(); 
         addLoop(count); 
 
     }  
-    trace_event_end(none); //for addLoop 'E'
+    trace_event_end("none"); //for addLoop 'E'
     return; 
 }
 void otherLoop(){

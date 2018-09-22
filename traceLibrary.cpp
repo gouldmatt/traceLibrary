@@ -4,23 +4,23 @@
 #include "traceLibrary.hpp"
 
 struct traceEvent{
-    char *namePtr;
+    const char *namePtr;
     char phaseNumber; // 0 duration, 1 counter event 
     int startTime;
     int endTime;
-    char *threadPtr;
-    char *arguments;
-    char *category;
-    char *counterKey;
+    const char *threadPtr;
+    const char *arguments;
+    const char *category;
+    const char *counterKey;
 };
-char *fileName;
+const char *fileName;
 unsigned short int stack[10000];
 traceEvent eventsArr[10000];
 int eventIndex;
 int stackCounter;
 
 
-void TRACELIBRARY::trace_start(char* file){ 
+void TRACELIBRARY::trace_start(const char* file){ 
     eventIndex = 0; 
     stackCounter = 0; 
     fileName = file; 
@@ -30,7 +30,7 @@ void TRACELIBRARY::trace_end(){
     TRACELIBRARY::trace_flush(); 
 }
 
-void TRACELIBRARY::trace_event_start(char* name, char* cat, char* arg){
+void TRACELIBRARY::trace_event_start(const char* name, const char* cat, const char* arg){
 
     eventsArr[eventIndex].namePtr = name;
     eventsArr[eventIndex].category = cat; 
@@ -48,7 +48,7 @@ void TRACELIBRARY::trace_event_start(char* name, char* cat, char* arg){
     eventIndex++;
 }
 
-void TRACELIBRARY::trace_event_end(char* arg){
+void TRACELIBRARY::trace_event_end(const char* arg){
 
     eventsArr[eventIndex].phaseNumber = 0; 
 
@@ -91,19 +91,19 @@ void TRACELIBRARY::trace_flush(){
     f.close();
 }
 
-void TRACELIBRARY::trace_instant_global(char* name){
+void TRACELIBRARY::trace_instant_global(const char* name){
 
 }
 
-void TRACELIBRARY::trace_object_new(char* name, void* obj_pointer){
+void TRACELIBRARY::trace_object_new(const char* name, void* obj_pointer){
 
 }
 
-void TRACELIBRARY::trace_object_gone(char* name, void* obj_pointer){
+void TRACELIBRARY::trace_object_gone(const char* name, void* obj_pointer){
 
 }
 
-void TRACELIBRARY::trace_counter(char* name, char* key, char* value){
+void TRACELIBRARY::trace_counter(const char* name, const char* key, const char* value){
     eventsArr[eventIndex].namePtr = name;
     eventsArr[eventIndex].phaseNumber = 1; 
     eventsArr[eventIndex].arguments = value; 
