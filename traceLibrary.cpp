@@ -1,6 +1,6 @@
 // header file  for trace library 
-//#ifndef TRACELIBRARY_HPP
-//#define TRACELIBRARY_HPP
+#ifndef TRACELIBRARY_HPP
+#define TRACELIBRARY_HPP
 
 #include <iostream>
 #include <fstream> 
@@ -103,5 +103,4 @@ namespace TRACELIBRARY
         f.close();
     }
 }
-
-//#endif 
+#endif 
