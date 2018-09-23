@@ -8,6 +8,7 @@ CFLAGS  = -Wall
 
 traceLibrary.o: traceLibrary.hpp testCase.cpp traceLibrary.cpp
 	g++ testCase.cpp traceLibrary.cpp -o traceLibrary
+
 	
 clean:
 	rm *.o traceLibrary
