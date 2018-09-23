@@ -7,4 +7,5 @@
 - the program crashes
 - when trace is flushed 
 
-## add instructions for compiling
+## Instructions for compiling
+- run make from project directory 
