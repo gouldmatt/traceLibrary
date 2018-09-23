@@ -5,7 +5,7 @@
 
 struct traceEvent{
     const char *namePtr;
-    char phaseNumber; // 0 duration, 1 counter event 
+    char phaseNumber; // 0 duration event, 1 counter event 
     int startTime;
     int endTime;
     const char *threadPtr;
