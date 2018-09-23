@@ -21,5 +21,7 @@ namespace TRACELIBRARY{
     void trace_object_gone(const char* name, void* obj_pointer);
 
     void trace_counter(const char* name, const char* key, const char* value);
+
+    void signal_handler(int signal_num);
 }
 #endif 

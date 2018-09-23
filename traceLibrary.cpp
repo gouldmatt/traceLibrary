@@ -115,3 +115,10 @@ void TRACELIBRARY::trace_counter(const char* name, const char* key, const char* 
     eventsArr[eventIndex].startTime = t;
     eventIndex++;
 }
+
+void TRACELIBRARY::signal_handler(int signal_num){ 
+    std::cout << "The interrupt signal is (" << signal_num << "). \n"; 
+    TRACELIBRARY::trace_end();
+    // terminate program   
+    exit(signal_num);
+}  

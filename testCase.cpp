@@ -1,4 +1,5 @@
 #include <iostream>
+#include <csignal>
 #include "traceLibrary.hpp"
 
 using namespace std;
@@ -9,7 +10,7 @@ void addLoop(int count);
 void otherLoop(); 
 
 int main(){
-
+    signal(SIGSEGV, signal_handler); // register signal SIGSEGV and signal handler
     int count = 9; 
 
     trace_start("outputfile.JSON");
@@ -18,7 +19,6 @@ int main(){
     trace_event_start("addLoop", "PERF", "none"); //for addLoop 'B'
     addLoop(count);
     trace_event_end("none"); //for addLoop 'E'
-
     trace_counter("counter","ctr","10");
     otherLoop();
     trace_counter("counter","ctr","20");
