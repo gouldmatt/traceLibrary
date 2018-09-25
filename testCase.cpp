@@ -11,7 +11,7 @@ void otherLoop();
 
 int main(){
     signal(SIGSEGV, signal_handler); // register signal SIGSEGV and signal handler
-    int count = 9; 
+    int count = 3; 
 
     trace_start("outputfile.JSON");
     trace_event_start("main", "PERF", "none"); //for main 'B'

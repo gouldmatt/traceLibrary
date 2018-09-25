@@ -6,8 +6,8 @@
 #  -Wall turns on most, but not all, compiler warnings
 CFLAGS  = -Wall
 
-traceLibrary.o: traceLibrary.hpp testCase.cpp traceLibrary.cpp
-	g++ testCase.cpp traceLibrary.cpp -o traceLibrary
+traceLibrary.o: traceLibrary.hpp bzip2.c traceLibrary.cpp
+	g++ bzip2.c traceLibrary.cpp -o bzip2
 	
 clean:
 	rm *.o traceLibrary
